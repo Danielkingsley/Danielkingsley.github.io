@@ -1,5 +1,6 @@
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 /* CSS */
 .button-18 {
@@ -71,13 +72,56 @@ display: table;
 clear: both;
 }
 a {text-decoration: none;}
+
+.collapsible {
+  background-color: #0A66C2;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  max-width: 480px;
+  min-height: 40px;
+  min-width: 0px;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  overflow: hidden;
+  padding-left: 20px;
+  padding-right: 20px;
+  border: 0;
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: #ffffff;
+  font-family: -apple-system, system-ui, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.active, .collapsible:hover {
+  background-color: #16437E;
+}
+
+.content {
+  max-width: 480px;
+  min-height: 40px;
+  min-width: 0px;
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+}
 </style>
 </head>
 <body>
 <div class="row">
         <div class="column left">
 			<h2>ZEUS Links</h2>
+				<button type="button" class="collapsible">Log Triage Quip's</button>
+				<div class="content"><br>
+				<a class=button-18 role="button" href="https://quip-amazon.com/z2RAATkSlHJb/October-2022-BUG-TRIAGE-REPORT" target=_blank>October Bug Triage Report</a><br><br>
 				<a class=button-18 role="button" href="https://quip-amazon.com/AOQnAx7dPGwO/September-2022-BUG-TRIAGE-REPORT" target=_blank>September Bug Triage Report</a><br><br>
+				</div><br><br>
+				
+				<!--<a class=button-18 role="button" href="https://quip-amazon.com/AOQnAx7dPGwO/September-2022-BUG-TRIAGE-REPORT" target=_blank>September Bug Triage Report</a><br><br>-->
 				<a class=button-18  href="https://jira.atl.ring.com/issues/?filter=46018" target=_blank>ZEUS - Everyday Issues</a><br><br>
 				<a class=button-18  href="https://confluence.atl.ring.com/pages/viewpage.action?spaceKey=PZ&title=FT+QAA+Resource+Utilization+-+Zeus" target=_blank>QAA Resource Utitlization - ZEUS</a><br><br>
 				<a class=button-18  href="https://jira.atl.ring.com/issues/?filter=52514" target=_blank>Blocker & Critical Per RC build</a><br><br>
@@ -124,5 +168,23 @@ a {text-decoration: none;}
 			<a class=button-18  href="https://testrail.vesta.amazon.dev/" target=_blank>Testrail</a><br><br>
         </div>
     </div>
+	
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>	
+	
 </body>
 </html>	
