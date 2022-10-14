@@ -8,26 +8,24 @@
   padding: 20px;
 }
 </style>
-	</head>
+</head>
 	
 <body>	
 <pre>
-  <code>
-ATHENA LOG QUERY
-*OLD QUERY*	
-	
-SELECT *	
+<center><h2 style="font-size:500%;">ATHENA & SPLUNK LOG QUERIES<h2></center>
+<center><h3 style="font-size:200%;">OLD QUERY<font></center>
+<code><i>SELECT *	
 FROM ring.devices_pq	
 WHERE type = 'always_home_camera'	
-AND device_id = 'mac id'	                                                     ##Enter MAC id (all lowercase) - TIME SHOULD BE CONVERTED TO UTC
-AND dt BETWEEN '2022-01-10 16' AND '2022-01-11 23'	                           ##Enter the date and time here. Initial and end time should be 3 hrs before and after from the reported time. It will download the logs between the initital and end time.(YYYY-MM-DD)
-AND ts >= '2022-01-10T20:00:00.000Z'	                                         ##Here date should be the starting date and the time should be at what time the logs needs to be printed on the webpage.
+AND device_id = 'mac id'	                             <a style="color:MediumSeaGreen;"># Enter MAC id (all lowercase) - TIME SHOULD BE CONVERTED TO UTC</a>
+AND dt BETWEEN '2022-01-10 16' AND '2022-01-11 23'	     <a style="color:MediumSeaGreen;"># Enter the date and time here. Initial and end time should be 3 hrs before and after from the reported time. It will download the logs between the initital and end time.(YYYY-MM-DD)</a>
+AND ts >= '2022-01-10T20:00:00.000Z'	                     <a style="color:MediumSeaGreen;"># Here date should be the starting date and the time should be at what time the logs needs to be printed on the webpage.</a>
 order by ts asc	
 --limit 5000	
-	
-NEW QUERY	
-	
-SELECT *	
+</i></code><br><br>
+
+<center><h3 style="font-size:200%;">NEW QUERY<h3></center>
+<code><i>SELECT *	
 FROM	
 (	
 SELECT	
@@ -53,13 +51,12 @@ AND json_extract_scalar(json, '$.meta.timestamp') <= '2022-10-04T06:00:00Z'
 AND json_extract_scalar(json, '$.properties.deviceId') in ('9c7613006986')	
 )	
 ORDER BY time_stamp ASC, length(seq) ASC, seq ASC	
+</code></i></code>
 
-
-SPLUNK LOG QUERY
-index="mobile_logs" user_id="80991823"
-
-Time should be converted to UTC
-  </code>
+<center><h3 style="font-size:200%;">SPLUNK LOG QUERY<h3></center>
+<code><i>index="mobile_logs" user_id="80991823"</i>
+<a style="color:MediumSeaGreen;"># Time should be converted to UTC</a>
+</code>	
 </pre> 
 </body>
 </html>
