@@ -1,0 +1,61 @@
+<html>
+<style>
+  pre code {
+  background-color: #eee;
+  border: 1px solid #999;
+  display: block;
+  padding: 20px;
+}
+</style>
+
+<pre>
+  <code>
+ATHENA LOG QUERY
+*OLD QUERY*	
+	
+SELECT *	
+FROM ring.devices_pq	
+WHERE type = 'always_home_camera'	
+AND device_id = 'mac id'	                                                     ##Enter MAC id (all lowercase) - TIME SHOULD BE CONVERTED TO UTC
+AND dt BETWEEN '2022-01-10 16' AND '2022-01-11 23'	                           ##Enter the date and time here. Initial and end time should be 3 hrs before and after from the reported time. It will download the logs between the initital and end time.(YYYY-MM-DD)
+AND ts >= '2022-01-10T20:00:00.000Z'	                                         ##Here date should be the starting date and the time should be at what time the logs needs to be printed on the webpage.
+order by ts asc	
+--limit 5000	
+	
+NEW QUERY	
+	
+SELECT *	
+FROM	
+(	
+SELECT	
+json_extract_scalar(json, '$.meta.seq') seq,	
+json_extract_scalar(json, '$.meta.timestamp') time_stamp,	
+json_extract_scalar(json, '$.properties.level') log_level,	
+json_extract_scalar(json, '$.properties.module') module,	
+json_extract_scalar(json, '$.properties.pid') pid,	
+json_extract_scalar(json, '$.properties.line') line,	
+json_extract_scalar(json, '$.properties.file') file,	
+json_extract_scalar(json, '$.properties.func') func,	
+json_extract_scalar(json, '$.properties.message') message,	
+json_extract_scalar(json, '$.properties.ts') ts,	
+json_extract_scalar(json, '$.properties.subsys') subsys,	
+json_extract_scalar(json, '$.properties.deviceId') Id,	
+json_extract_scalar(json, '$.properties.firmwareVersion') firmware_version,	
+json_extract_scalar(json, '$.properties.deviceKind') kind,	
+dt	
+FROM "eventstream_device_valid_prod"."ringlpd_logmsg_raw"	
+WHERE dt >= '2022-10-03 17'	
+AND json_extract_scalar(json, '$.meta.timestamp') >= '2022-10-03T17:00:00Z'	
+AND json_extract_scalar(json, '$.meta.timestamp') <= '2022-10-04T06:00:00Z'	
+AND json_extract_scalar(json, '$.properties.deviceId') in ('9c7613006986')	
+)	
+ORDER BY time_stamp ASC, length(seq) ASC, seq ASC	
+
+
+SPLUNK LOG QUERY
+index="mobile_logs" user_id="80991823"
+
+Time should be converted to UTC
+  </code>
+</pre>  
+</html>
