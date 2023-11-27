@@ -1,2 +1,2 @@
 # danielkingsley.github.io
-Amazon Links
+Links
